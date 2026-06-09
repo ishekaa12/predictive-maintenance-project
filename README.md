@@ -54,7 +54,7 @@ predictive-maintenance/
 
 **1. Clone the repository**
 ```bash
-git clone [https://github.com/your-username/predictive-maintenance.git](https://github.com/ishekaa12/predictive-maintenance-project.git)
+git clone [https://github.com/ishekaa12/predictive-maintenance-project.git]
 cd predictive-maintenance-project
 ```
 
