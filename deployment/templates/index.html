@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predictive Maintenance System</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Predictive Maintenance System</h1>
+        <p>Select a machine and enter sensor readings to predict failure</p>
+    </header>
+
+    <main>
+        <!-- Machine Selector -->
+        <section class="machine-selector">
+            <button class="machine-btn active" onclick="selectMachine('cnc')">CNC Milling Machine</button>
+            <button class="machine-btn" onclick="selectMachine('engine')">Aircraft Engine</button>
+            <button class="machine-btn" onclick="selectMachine('turbine')">Wind Turbine</button>
+        </section>
+
+        <!-- Input Forms — one per machine, only active one shown -->
+        <section class="input-section">
+
+            <div id="form-cnc" class="machine-form active">
+                <h2>CNC Milling Machine</h2>
+                <div class="input-grid">
+                    <label>Air Temperature (K)
+                        <input type="number" id="cnc-air-temp" value="298.1" step="0.1">
+                    </label>
+                    <label>Process Temperature (K)
+                        <input type="number" id="cnc-process-temp" value="308.6" step="0.1">
+                    </label>
+                    <label>Rotational Speed (RPM)
+                        <input type="number" id="cnc-speed" value="1551">
+                    </label>
+                    <label>Torque (Nm)
+                        <input type="number" id="cnc-torque" value="42.8" step="0.1">
+                    </label>
+                    <label>Tool Wear (min)
+                        <input type="number" id="cnc-wear" value="7">
+                    </label>
+                    <label>Machine Type
+                        <select id="cnc-type">
+                            <option value="L">L — Low</option>
+                            <option value="M" selected>M — Medium</option>
+                            <option value="H">H — High</option>
+                        </select>
+                    </label>
+                </div>
+                <button class="predict-btn" onclick="predict('cnc')">Run Prediction</button>
+            </div>
+
+            <div id="form-engine" class="machine-form">
+                <h2>Aircraft Engine</h2>
+                <div class="input-grid">
+                    <label>Current Cycle
+                        <input type="number" id="engine-cycle" value="50">
+                    </label>
+                    <label>Sensor 2 (Fan Inlet Temp)
+                        <input type="number" id="engine-s2" value="641.82" step="0.01">
+                    </label>
+                    <label>Sensor 3 (LPC Outlet Temp)
+                        <input type="number" id="engine-s3" value="1589.70" step="0.01">
+                    </label>
+                    <label>Sensor 4 (HPC Outlet Temp)
+                        <input type="number" id="engine-s4" value="1400.60" step="0.01">
+                    </label>
+                    <label>Sensor 7 (Fan Speed)
+                        <input type="number" id="engine-s7" value="554.36" step="0.01">
+                    </label>
+                    <label>Sensor 11 (HPC Outlet Pressure)
+                        <input type="number" id="engine-s11" value="47.47" step="0.01">
+                    </label>
+                </div>
+                <button class="predict-btn" onclick="predict('engine')">Run Prediction</button>
+            </div>
+
+            <div id="form-turbine" class="machine-form">
+                <h2>Wind Turbine</h2>
+                <div class="input-grid">
+                    <label>Wind Speed (m/s)
+                        <input type="number" id="turbine-speed" value="5.31" step="0.01">
+                    </label>
+                    <label>Active Power (kW)
+                        <input type="number" id="turbine-power" value="380.05" step="0.01">
+                    </label>
+                    <label>Theoretical Power (kWh)
+                        <input type="number" id="turbine-theoretical" value="416.33" step="0.01">
+                    </label>
+                    <label>Wind Direction (°)
+                        <input type="number" id="turbine-direction" value="259.99" step="0.01">
+                    </label>
+                </div>
+                <button class="predict-btn" onclick="predict('turbine')">Run Prediction</button>
+            </div>
+
+        </section>
+
+        <!-- Result Section — hidden until prediction runs -->
+        <section id="result" class="result-section hidden">
+            <h2>Prediction Result</h2>
+            <div class="result-grid">
+                <div class="result-card">
+                    <span class="result-label">Machine</span>
+                    <span class="result-value" id="res-machine">—</span>
+                </div>
+                <div class="result-card">
+                    <span class="result-label">Risk Level</span>
+                    <span class="result-value" id="res-risk">—</span>
+                </div>
+                <div class="result-card">
+                    <span class="result-label">Status</span>
+                    <span class="result-value" id="res-status">—</span>
+                </div>
+                <div class="result-card full-width">
+                    <span class="result-label">Recommendation</span>
+                    <span class="result-value" id="res-recommendation">—</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
