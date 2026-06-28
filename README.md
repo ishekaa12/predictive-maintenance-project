@@ -8,7 +8,7 @@ Predict equipment failure before it happens using real sensor data and machine l
 
 Unplanned equipment failure costs industries billions annually in downtime, repairs, and lost productivity. Traditional maintenance is either reactive (fix after failure) or time-based (fix on a schedule), both of which are inefficient.
 
-This project builds a data-driven alternative: a system that continuously analyzes sensor readings from equipment and predicts failure before it occurs. The result is maintenance that happens exactly when needed — not too early, not too late.
+This project builds a data-driven alternative: a system that continuously analyzes sensor readings from equipment and predicts failure before it occurs. The result is maintenance that happens exactly when needed — not too early, not too late
 
 ---
 
