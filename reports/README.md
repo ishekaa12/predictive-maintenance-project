@@ -1,67 +1,67 @@
 # Reports
 
-This folder contains weekly reports, project documentation, API documentation, and system architecture for the Predictive Maintenance Dashboard.
+This folder contains all project documentation, analysis notebooks, and findings generated throughout the 6-week project.
 
-# Deployment
+---
 
-## How to Run Locally
+## Structure
 
-1. Clone the project repository.
-2. Open a terminal and navigate to the project folder.
-3. Move to the deployment folder:
-
-```bash
-cd deployment
 ```
-
-4. Install the required Python packages (if not already installed):
-
-```bash
-pip install -r requirements.txt
-```
-
-5. Start the Flask application:
-
-```bash
-python3 app.py
-```
-
-6. Open your web browser and visit:
-
-```text
-http://127.0.0.1:5000
+reports/
+│
+├── notebooks/
+│   ├── 00_data_inspection.ipynb     # Raw inspection of all three datasets
+│   ├── 01_data_cleaning.ipynb       # Full cleaning pipeline with before/after output
+│   ├── 02_cnc_eda.ipynb             # Exploratory analysis — CNC Milling Machine
+│   ├── 03_engine_eda.ipynb          # Exploratory analysis — Aircraft Engine
+│   └── 04_turbine_eda.ipynb         # Exploratory analysis — Wind Turbine
+│
+├── figures/                         # Exported charts from EDA notebooks
+│
+├── data_cleaning_report.md          # Before/after summary for all three datasets
+├── api_docs.md                      # Full Flask API endpoint documentation
+└── architecture.md                  # System architecture and data flow diagram
 ```
 
 ---
 
-## File Structure
+## Documents
 
-| File/Folder               | Description                                                                               |
-| ------------------------- | ----------------------------------------------------------------------------------------- |
-| `app.py`                  | Main Flask application that defines all API routes and loads the machine learning models. |
-| `templates/index.html`    | Main web page displayed to the user.                                                      |
-| `static/style.css`        | Stylesheet that controls the appearance of the dashboard.                                 |
-| `static/script.js`        | Sends API requests and updates the webpage with prediction results.                       |
-| `models/`                 | Stores the trained machine learning model (`.pkl`) files. *(Loaded when available.)*      |
-| `reports/api_docs.md`     | Detailed documentation for all API endpoints.                                             |
-| `reports/architecture.md` | Description of the system architecture and data flow.                                     |
+### data_cleaning_report.md
+Documents every cleaning step applied to each dataset. Includes before and after snapshots — row counts, null counts, duplicate counts — and notes any issues to address during modeling such as class imbalance and engineered labels.
 
----
+### api_docs.md
+Documents all four Flask API endpoints. Includes input fields, output fields, example requests using curl, and example JSON responses. Reference this when wiring models into the backend in Week 5.
 
-## API Endpoints
-
-| Endpoint                | Description                                                          |
-| ----------------------- | -------------------------------------------------------------------- |
-| `GET /`                 | Displays the Predictive Maintenance Dashboard.                       |
-| `GET /health`           | Checks whether the API is running and shows which models are loaded. |
-| `POST /predict/cnc`     | Predicts the maintenance risk of a CNC milling machine.              |
-| `POST /predict/engine`  | Predicts the remaining useful life of an aircraft engine.            |
-| `POST /predict/turbine` | Detects anomalies in a wind turbine.                                 |
-
-For complete request and response details, see **`reports/api_docs.md`**.
+### architecture.md
+Explains how the system components connect — browser, Flask server, ML models. Includes a text-based architecture diagram and a full walkthrough of one prediction request from input to output.
 
 ---
 
-## How to Deploy to Render
+## Notebooks
 
-**To be completed in Week 6.**
+Run notebooks in order. Each one depends on outputs from the previous.
+
+| Notebook | Input | Output |
+|---|---|---|
+| 00_data_inspection | data/raw/ | Printed summaries |
+| 01_data_cleaning | data/raw/ | data/processed/ CSVs |
+| 02_cnc_eda | data/processed/cnc_cleaned.csv | Charts, feature ideas |
+| 03_engine_eda | data/processed/engine_cleaned.csv | Charts, feature ideas |
+| 04_turbine_eda | data/processed/wind_cleaned.csv | Charts, feature ideas |
+
+---
+
+## Status
+
+| Document | Status |
+|---|---|
+| data_cleaning_report.md | Complete |
+| api_docs.md | Complete |
+| architecture.md | Complete |
+| 00_data_inspection.ipynb | Complete |
+| 01_data_cleaning.ipynb | Complete |
+| 02_cnc_eda.ipynb | In progress — Week 2 |
+| 03_engine_eda.ipynb | In progress — Week 2 |
+| 04_turbine_eda.ipynb | In progress — Week 2 |
+| figures/ | Populated during EDA |
