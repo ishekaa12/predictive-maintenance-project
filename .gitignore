@@ -1,2 +1,27 @@
+
+# Raw data — too large for GitHub
+data/raw/
+
+# Trained models — can be regenerated
+models/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
 .ipynb_checkpoints/
+
+# Environment
+.env
+.venv/
+venv/
+
+# Mac system files
 .DS_Store
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Logs
+*.log
+EOF
