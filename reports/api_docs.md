@@ -161,7 +161,64 @@ curl -X POST http://localhost:5000/predict/turbine \
 }
 ```
 
+
 ---
+
+### POST /chat
+Description: Accepts a question and returns an answer about the predictive maintenance system. Saves the exchange to chat history.
+
+### Request Body:
+| Field | Type | Required | Description |
+|---|---|---|---|
+| question | string | yes | The user's question |
+
+### Example Request:
+```bash
+curl -X POST http://localhost:5000/chat \
+  -H "Content-Type: application/json" \
+  -d '{"question": "Tell me about CNC failures"}'
+```
+
+### Example Response:
+```json
+{
+  "answer": "CNC Milling Machine failures are caused by...",
+  "history": [
+    {
+      "id": 1,
+      "question": "Tell me about CNC failures",
+      "answer": "CNC Milling Machine failures are caused by...",
+      "timestamp": "2026-07-07 14:46:42"
+    }
+  ]
+}
+```
+---
+
+### GET /chat/history
+Description: Returns the full conversation history for the current session.
+
+### Example Response:
+```json
+[
+  {
+    "id": 1,
+    "question": "Tell me about CNC failures",
+    "answer": "...",
+    "timestamp": "2026-07-07 14:46:42"
+  }
+]
+```
+
+---
+
+### POST /chat/clear
+Description: Clears all chat history for the current session.
+
+### Example Response:
+```json
+{ "message": "Chat history cleared" }
+```
 
 ## Error Handling
 
