@@ -1,4 +1,3 @@
-
 # Raw data — too large for GitHub
 data/raw/
 
@@ -9,6 +8,8 @@ models/
 __pycache__/
 *.pyc
 *.pyo
+
+# Jupyter
 .ipynb_checkpoints/
 
 # Environment
@@ -19,9 +20,5 @@ venv/
 # Mac system files
 .DS_Store
 
-# Jupyter
-.ipynb_checkpoints/
-
 # Logs
 *.log
-EOF

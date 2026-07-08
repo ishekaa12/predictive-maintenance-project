@@ -75,3 +75,35 @@ function displayResult(data) {
 
     document.getElementById("res-recommendation").textContent = data.recommendation || "—";
 }
+function sendChat() {
+    const input = document.getElementById("chat-input");
+    const question = input.value.trim();
+    if (!question) return;
+
+    input.value = "";
+
+    fetch("/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ question: question })
+    })
+    .then(response => response.json())
+    .then(data => {
+        const window = document.getElementById("chat-window");
+        const empty = document.getElementById("chat-empty");
+        if (empty) empty.remove();
+
+        const entry = data.history[data.history.length - 1];
+
+        const msg = document.createElement("div");
+        msg.className = "chat-message";
+        msg.innerHTML = `
+            <div class="chat-question">${entry.question}</div>
+            <div class="chat-answer">${entry.answer}</div>
+            <div class="chat-timestamp">${entry.timestamp}</div>
+        `;
+        window.appendChild(msg);
+        window.scrollTop = window.scrollHeight;
+    })
+    .catch(error => console.error("Chat error:", error));
+}
