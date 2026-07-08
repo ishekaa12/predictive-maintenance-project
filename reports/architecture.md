@@ -71,3 +71,29 @@ A complete prediction request follows these steps:
 10. Flask creates a JSON response containing the prediction, risk level, and maintenance recommendation.
 11. JavaScript receives the response from the server.
 12. The webpage is updated instantly to display the prediction results to the user.
+
+## Conversation History Flow
+```text
+
+User types question in chat input
+        ↓
+JavaScript sends POST to /chat with { question }
+        ↓
+Flask receives question
+        ↓
+generate_answer() matches keywords and returns relevant answer
+        ↓
+Entry saved to chat_history list with id, question, answer, timestamp
+        ↓
+Full history returned in response
+        ↓
+JavaScript renders new message bubble in chat window
+        ↓
+Chat scrolls to latest message
+```
+
+## Storage Note
+
+Chat history is stored in a Python list in memory. It resets when the 
+Flask server restarts. This is intentional for a 6-week project scope.
+A production system would use a database like SQLite or PostgreSQL.
