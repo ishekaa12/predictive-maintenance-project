@@ -293,3 +293,43 @@ input:focus, select:focus {
 .chat-input-row button:hover {
     background: #1d4ed8;
 }
+.log-section {
+    margin-top: 2rem;
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 12px;
+    padding: 2rem;
+}
+
+.log-section h2 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #ffffff;
+    margin-bottom: 1rem;
+}
+
+.log-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+}
+
+.log-table th {
+    text-align: left;
+    color: #666;
+    font-weight: 400;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #2a2a2a;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+}
+
+.log-table td {
+    padding: 0.6rem 0;
+    color: #ccc;
+    border-bottom: 1px solid #1a1a1a;
+}
+.log-table td.risk-HIGH { color: #ef4444; }
+.log-table td.risk-MEDIUM { color: #f59e0b; }
+.log-table td.risk-LOW { color: #22c55e; }

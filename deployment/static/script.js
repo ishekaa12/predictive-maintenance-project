@@ -1,21 +1,23 @@
 let currentMachine = "cnc";
+const predictionLog = [];
 
 function selectMachine(machine) {
-    // Update active button
     document.querySelectorAll(".machine-btn").forEach(btn => btn.classList.remove("active"));
     event.target.classList.add("active");
 
-    // Show correct form
     document.querySelectorAll(".machine-form").forEach(form => form.classList.remove("active"));
     document.getElementById("form-" + machine).classList.add("active");
 
-    // Hide results
     document.getElementById("result").classList.add("hidden");
 
     currentMachine = machine;
 }
 
 function predict(machine) {
+    const btn = document.querySelector(`#form-${machine} .predict-btn`);
+    btn.textContent = "Running...";
+    btn.disabled = true;
+
     let payload = {};
 
     if (machine === "cnc") {
@@ -51,8 +53,16 @@ function predict(machine) {
         body: JSON.stringify(payload)
     })
     .then(response => response.json())
-    .then(data => displayResult(data))
-    .catch(error => console.error("Prediction error:", error));
+    .then(data => {
+        displayResult(data);
+        btn.textContent = "Run Prediction";
+        btn.disabled = false;
+    })
+    .catch(error => {
+        console.error("Prediction error:", error);
+        btn.textContent = "Run Prediction";
+        btn.disabled = false;
+    });
 }
 
 function displayResult(data) {
@@ -64,7 +74,6 @@ function displayResult(data) {
     riskEl.textContent = data.risk_level || "—";
     riskEl.className = "result-value risk-" + (data.risk_level || "");
 
-    // Status line varies by machine type
     if (data.failure_type !== undefined) {
         document.getElementById("res-status").textContent = data.failure_type;
     } else if (data.rul_cycles !== undefined) {
@@ -74,7 +83,26 @@ function displayResult(data) {
     }
 
     document.getElementById("res-recommendation").textContent = data.recommendation || "—";
+
+    // Update prediction log
+    predictionLog.unshift({
+        machine: data.machine,
+        risk: data.risk_level,
+        time: new Date().toLocaleTimeString()
+    });
+
+    const log = predictionLog.slice(0, 5);
+    const logHTML = log.map(entry =>
+        `<tr>
+            <td>${entry.time}</td>
+            <td>${entry.machine}</td>
+            <td class="risk-${entry.risk}">${entry.risk}</td>
+        </tr>`
+    ).join("");
+
+    document.getElementById("prediction-log").innerHTML = logHTML;
 }
+
 function sendChat() {
     const input = document.getElementById("chat-input");
     const question = input.value.trim();
@@ -89,7 +117,7 @@ function sendChat() {
     })
     .then(response => response.json())
     .then(data => {
-        const window = document.getElementById("chat-window");
+        const chatWindow = document.getElementById("chat-window");
         const empty = document.getElementById("chat-empty");
         if (empty) empty.remove();
 
@@ -102,8 +130,8 @@ function sendChat() {
             <div class="chat-answer">${entry.answer}</div>
             <div class="chat-timestamp">${entry.timestamp}</div>
         `;
-        window.appendChild(msg);
-        window.scrollTop = window.scrollHeight;
+        chatWindow.appendChild(msg);
+        chatWindow.scrollTop = chatWindow.scrollHeight;
     })
     .catch(error => console.error("Chat error:", error));
 }

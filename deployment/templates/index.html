@@ -10,7 +10,7 @@
 
     <header>
         <h1>Predictive Maintenance System</h1>
-        <p>Select a machine and enter sensor readings to predict failure</p>
+        <p>Real-time failure prediction for CNC machines, aircraft engines, and wind turbines</p>
     </header>
 
     <main>
@@ -122,23 +122,32 @@
             </div>
         </section>
 
-    </main>
-    <!-- Chat Section -->
-<section class="chat-section">
-    <h2>Ask the System</h2>
-    <div class="chat-window" id="chat-window">
-        <div class="chat-empty" id="chat-empty">
-            Ask a question about any machine, model performance, or dataset.
-        </div>
-    </div>
-    <div class="chat-input-row">
-        <input type="text" id="chat-input" 
-               placeholder="e.g. Tell me about CNC failures..."
-               onkeypress="if(event.key === 'Enter') sendChat()">
-        <button onclick="sendChat()">Send</button>
-    </div>
-</section>
-
+        <section class="log-section">
+             <h2>Recent Predictions</h2>
+             <table class="log-table">
+                  <thead>
+                   <tr><th>Time</th><th>Machine</th><th>Risk</th></tr>
+                 </thead>
+                    <tbody id="prediction-log"></tbody>
+                 </table>
+                </section>
+                <!-- Chat Section -->
+                 <section class="chat-section">
+                    <h2>Ask the System</h2>
+                    <div class="chat-window" id="chat-window">
+                        <div class="chat-empty" id="chat-empty">
+                            Ask a question about any machine, model performance, or dataset.
+                        </div>
+                    </div>
+                    <div class="chat-input-row">
+                        <input type="text" id="chat-input" 
+                         placeholder="e.g. Tell me about CNC failures..."
+                         onkeypress="if(event.key === 'Enter') sendChat()">
+                          <button onclick="sendChat()">Send</button>
+                         </div>
+                        </section>
+     </main>
+    
     <script src="/static/script.js"></script>
 </body>
 </html>
