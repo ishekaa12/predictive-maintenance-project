@@ -175,7 +175,7 @@ Full documentation in `reports/api_docs.md`
 [Watch the demo video](your-link-here)
 
 ### Dashboard Preview
-![CNC High Risk Prediction](reports/figures/dashboard_cnc_high_risk.png)
+![](reports/figures/dashboard_cnc_high_risk.png)
 
 
 ---
